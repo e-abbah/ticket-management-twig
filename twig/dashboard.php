@@ -1,8 +1,8 @@
 <?php
 // dashboard.php
 
-require_once __DIR__ . '/vendor/autoload.php';
 session_start();
+require_once __DIR__ . '/vendor/autoload.php';
 
 // Redirect to login if not logged in
 if (!isset($_SESSION['ticketapp_user'])) {
@@ -11,27 +11,22 @@ if (!isset($_SESSION['ticketapp_user'])) {
 }
 
 $user = $_SESSION['ticketapp_user'];
-$userName = $user['fullName'] ?? 'User';
 
-// Simulated ticket stats — replace later with DB/API
-$tickets = [
-    ['id' => 1, 'status' => 'open'],
-    ['id' => 2, 'status' => 'resolved'],
-    ['id' => 3, 'status' => 'open'],
-    ['id' => 4, 'status' => 'resolved'],
-];
+// Simulated ticket stats
+$ticketsFile = __DIR__ . '/tickets.json';
+$tickets = file_exists($ticketsFile) ? json_decode(file_get_contents($ticketsFile), true) : [];
 
 $total = count($tickets);
 $open = count(array_filter($tickets, fn($t) => $t['status'] === 'open'));
 $resolved = count(array_filter($tickets, fn($t) => $t['status'] === 'resolved'));
 
-// Setup Twig
+// Twig setup
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/templates');
 $twig = new \Twig\Environment($loader);
 
 // Render template
 echo $twig->render('dashboard.twig', [
-    'userName' => $userName,
+    'user' => $user,           // pass full session user
     'stats' => [
         'total' => $total,
         'open' => $open,

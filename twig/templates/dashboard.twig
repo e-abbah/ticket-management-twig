@@ -11,7 +11,7 @@
     <!-- Header -->
     <div class="flex justify-between items-center mb-10">
       <h1 class="text-3xl font-bold text-gray-800">
-        Welcome, <span class="text-red-600">{{ userName }}</span>
+        Welcome, <span class="text-red-600">{{ user.fullName }}</span>
       </h1>
 
       <form action="logout.php" method="POST">
@@ -44,7 +44,7 @@
     <!-- Navigation to Ticket Management -->
     <div class="mt-12 flex justify-center">
       <a
-        href="tickets.php"
+        href="/tickets.php"
         class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-md shadow-md transition">
         Go to Ticket Management
       </a>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Ticket Management{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+
+  {% block nav %}
+  <!-- optional nav/menu -->
+  {% endblock %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  {% block footer %}
+  <footer class="bg-gray-100 py-8">
+    <div class="max-w-[1440px] mx-auto px-6 text-gray-600 text-sm">
+      &copy; {{ "now"|date("Y") }} Ticket Management
+    </div>
+  </footer>
+  {% endblock %}
+
+</body>
+</html>
